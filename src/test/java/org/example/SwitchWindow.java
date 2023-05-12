@@ -5,42 +5,36 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import java.util.List;
+import java.security.Key;
+import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
-
-public class RadioButton {
-
+public class SwitchWindow {
     public WebDriver driver;
     public String url = "https://www.letskodeit.com/practice";
-
     @Before
     public void setup(){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.get(url);
     }
-
     @Test
-    public void checkRadioButton() throws InterruptedException {
-        driver.findElement(By.id("bmwradio")).click();
-        Thread.sleep(3000);
-        boolean ans = driver.findElement(By.id("bmwradio")).isSelected();
-        assertEquals(true,ans);
-        boolean ans1 = driver.findElement(By.id("hondaradio")).isSelected();
-        assertEquals(false,ans1);
+    public void testOpenWindow(){
+        String ParentWindow = driver.getWindowHandle();
+        System.out.println("Parent Window Handle:"+ParentWindow);
+        driver.findElement(By.id("openwindow")).click();
 
-        System.out.println("BMW Radio Button is selected? " + ans);
-        System.out.println("Honda Radio Button is selected? " + ans1);
+        WebElement search = driver.findElement(By.xpath("//input[@id='search']"));
+        search.sendKeys("Python");
+        search.sendKeys(Keys.ENTER);
 
     }
-
     @After
     public void tearDown(){
         driver.close();

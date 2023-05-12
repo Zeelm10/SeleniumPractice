@@ -9,6 +9,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
@@ -41,6 +43,16 @@ public class CheckboxButton {
         System.out.println("Honda Checkbox is selected?" + hondacheckbox.isSelected());
 
     }
+
+//    @Test
+//    public void getList(){
+//
+//        List<WebElement> label = driver.findElements(By.xpath("//div[@id='checkbox-example-div']/fieldset/label"));
+//        System.out.println(label);
+//        for (WebElement labelElement:label) {
+//            System.out.println(labelElement.getText());
+//        }
+//    }
     @After
     public void tearDown(){
         driver.close();
